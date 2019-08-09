@@ -21,19 +21,47 @@ class ADTTest extends FunSpec {
         )
       }
 
+      it("should return json string represents an Qux event") {
+        assert(
+          ADT.encodeJsonString(
+            Qux(values = List("1", "2"))
+          ) == """{"values":["1","2"]}"""
+        )
+      }
+
+      it("should return json string represents an FooBar event") {
+        assert(
+          ADT.encodeJsonString(FooBar) == """"foobar""""
+        )
+      }
+
     }
 
     describe("should decodeJsonString") {
 
-      it("should return Foo given a valid json string") {
+      it("should return Foo given a valid Foo json string") {
         assert(
           ADT.decodeJsonString("""{"i":1}""") == Right(Foo(i = 1))
         )
       }
 
-      it("should return Bar given a valid json string") {
+      it("should return Bar given a valid Bar json string") {
         assert(
           ADT.decodeJsonString("""{"s":"1"}""") == Right(Bar(s = "1"))
+        )
+      }
+
+      it("should return Qux given a valid Qux json string") {
+        assert(
+          ADT.encodeJsonString(
+            Qux(values = List("1", "2"))
+          ) == """{"values":["1","2"]}"""
+        )
+      }
+
+      it("should return FooBar given a valid FooBar json string") {
+        assert(
+          ADT.decodeJsonString(""""foobar"""") == Right(FooBar)
         )
       }
 
