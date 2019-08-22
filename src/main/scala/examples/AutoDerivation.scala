@@ -6,6 +6,7 @@ import io.circe.parser.decode
 import models.Person
 
 object AutoDerivation {
+
   def encodeJsonString(person: Person): String = {
     person.asJson.noSpaces
   }
@@ -13,4 +14,5 @@ object AutoDerivation {
   def decodeJsonString(input: String): Either[Exception, Person] = {
     decode[Person](input)
   }
+
 }

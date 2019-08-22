@@ -6,6 +6,7 @@ import models.Event
 import models.Event._
 
 object ADT {
+
   def encodeJsonString(person: Event): String = {
     person.asJson.noSpaces
   }
@@ -13,4 +14,5 @@ object ADT {
   def decodeJsonString(input: String): Either[Exception, Event] = {
     decode[Event](input)
   }
+
 }

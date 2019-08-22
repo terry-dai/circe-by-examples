@@ -2,6 +2,7 @@ package models
 
 import io.circe._
 import io.circe.generic.auto._
+
 import io.circe.syntax._
 import cats.syntax.functor._
 
@@ -22,13 +23,10 @@ object Event {
     case FooBar       => "foobar".asJson
   }
 
-  val decodeFooBar: Decoder[Event] = Decoder.decodeString.emap(
-    value =>
-      value match {
-        case "foobar" => Right(FooBar)
-        case _        => Left("Invalid FooBar value.")
-    }
-  )
+  val decodeFooBar: Decoder[Event] = Decoder.decodeString.emap {
+    case "foobar" => Right(FooBar)
+    case _        => Left("Invalid FooBar value.")
+  }
 
   implicit val decodeEvent: Decoder[Event] =
     List[Decoder[Event]](
